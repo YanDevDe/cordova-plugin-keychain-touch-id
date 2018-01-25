@@ -60,7 +60,14 @@
         <resource-file src="res/android/layout/fingerprint_dialog_content.xml" target="res/layout/fingerprint_dialog_content.xml" />
         <resource-file src="res/android/values/fpauth-colors.xml" target="res/values/fpauth-colors.xml" />
         <resource-file src="res/android/values/fpauth-strings.xml" target="res/values/fpauth-strings.xml" />
+        <resource-file src="res/android/values-de/fpauth-strings.xml" target="res/values-de/fpauth-strings.xml" />
         <resource-file src="res/android/values-es/fpauth-strings.xml" target="res/values-es/fpauth-strings.xml" />
+        <resource-file src="res/android/values-fr/fpauth-strings.xml" target="res/values-fr/fpauth-strings.xml" />
+        <resource-file src="res/android/values-it/fpauth-strings.xml" target="res/values-it/fpauth-strings.xml" />
+        <resource-file src="res/android/values-ja/fpauth-strings.xml" target="res/values-ja/fpauth-strings.xml" />
+        <resource-file src="res/android/values-no/fpauth-strings.xml" target="res/values-no/fpauth-strings.xml" />
+        <resource-file src="res/android/values-pt/fpauth-strings.xml" target="res/values-pt/fpauth-strings.xml" />
+        <resource-file src="res/android/values-ru/fpauth-strings.xml" target="res/values-ru/fpauth-strings.xml" />
 
     </platform>
 </plugin>
