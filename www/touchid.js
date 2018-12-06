@@ -19,11 +19,7 @@ var touchid = {
 	},
 	setLocale: function(locale,successCallback, errorCallback){
 		exec(successCallback, errorCallback, "TouchID", "setLocale", [locale]);
-	},
-	move: function(key, packageName,successCallback, errorCallback){
-    	exec(successCallback, errorCallback, "TouchID", "move", [key,packageName]);
-    }
-
+	}
 };
 
 module.exports = touchid;

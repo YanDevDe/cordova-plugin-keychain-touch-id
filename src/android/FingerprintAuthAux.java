@@ -364,14 +364,6 @@ public class FingerprintAuthAux {
             }
             mCallbackContext.sendPluginResult(mPluginResult);
             return true;
-        } else if (action.equals(MOVE)) { //Move shared preferences from activity to global
-            String key = args.getString(0);
-            String oldActivityPackageName = args.getString(1);
-            //Get old shared Preferences e.g: "com.outsystems.android.WebApplicationActivity"
-            migrateExistingPreferences(cordova, oldActivityPackageName, key);
-            mPluginResult = new PluginResult(PluginResult.Status.OK);
-            mCallbackContext.sendPluginResult(mPluginResult);
-            return true;
         }
         return false;
     }
