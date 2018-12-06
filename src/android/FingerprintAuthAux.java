@@ -338,7 +338,7 @@ public class FingerprintAuthAux {
             return true;
         } else if (action.equals(HAS)) { //if has key
             String key = args.getString(0);
-
+            migrateExistingPreferences(cordova, "MainActivity", key);
             SharedPreferences sharedPref = cordova.getActivity().getApplicationContext().getSharedPreferences(SHARED_PREFS_NAME,Context.MODE_PRIVATE);
             String enc = sharedPref.getString("fing" + key, "");
 
@@ -368,27 +368,38 @@ public class FingerprintAuthAux {
             String key = args.getString(0);
             String oldActivityPackageName = args.getString(1);
             //Get old shared Preferences e.g: "com.outsystems.android.WebApplicationActivity"
-            SharedPreferences oldSharedPref = cordova.getActivity().getApplicationContext().getSharedPreferences(oldActivityPackageName,Context.MODE_PRIVATE);
-            String enc = oldSharedPref.getString("fing" + key, "");
-            
-            if (!enc.equals("")) {
-                SharedPreferences newSharedPref = cordova.getActivity().getApplicationContext().getSharedPreferences(SHARED_PREFS_NAME,Context.MODE_PRIVATE);
-                SharedPreferences.Editor newEditor = newSharedPref.edit();
-                newEditor.putString("fing" + key, oldSharedPref.getString("fing" + key, ""));
-                newEditor.putString("fing_iv" + key, oldSharedPref.getString("fing_iv" + key, ""));
-                newEditor.commit();
-                
-                SharedPreferences.Editor oldEditor = oldSharedPref.edit();
-                oldEditor.remove("fing" + key);
-                oldEditor.remove("fing_iv" + key);
-                oldEditor.commit();
-            }
-            
+            migrateExistingPreferences(cordova, oldActivityPackageName, key);
             mPluginResult = new PluginResult(PluginResult.Status.OK);
             mCallbackContext.sendPluginResult(mPluginResult);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Migrates entries from activity preferences to shared preferences
+     * @param cordova
+     * @param oldPrefsName e.g. MainActivity
+     * @param key preference key suffix
+     */
+    private void migrateExistingPreferences(CordovaInterface cordova, String oldPrefsName, String key) {
+        SharedPreferences oldSharedPref = cordova.getActivity().getApplicationContext().getSharedPreferences(oldPrefsName,Context.MODE_PRIVATE);
+        String enc = oldSharedPref.getString("fing" + key, "");
+
+        if (enc.equals("")) {
+            Log.d(TAG, "No preferences to migrate.");
+        } else {
+            Log.i(TAG, "Migrating preferences from " + oldPrefsName + " to " + SHARED_PREFS_NAME);
+            SharedPreferences newSharedPref = cordova.getActivity().getApplicationContext().getSharedPreferences(SHARED_PREFS_NAME,Context.MODE_PRIVATE);
+            newSharedPref.edit()
+                    .putString("fing" + key, oldSharedPref.getString("fing" + key, ""))
+                    .putString("fing_iv" + key, oldSharedPref.getString("fing_iv" + key, ""))
+                    .commit();
+            oldSharedPref.edit()
+                    .remove("fing" + key)
+                    .remove("fing_iv" + key)
+                    .commit();
+        }
     }
 
     private boolean isFingerprintAuthAvailable() {
