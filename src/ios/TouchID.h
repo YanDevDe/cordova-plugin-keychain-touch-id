@@ -17,7 +17,6 @@
  under the License.
  */
 
-#import <UIKit/UIKit.h>
 #import "KeychainWrapper.h"
 #import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
