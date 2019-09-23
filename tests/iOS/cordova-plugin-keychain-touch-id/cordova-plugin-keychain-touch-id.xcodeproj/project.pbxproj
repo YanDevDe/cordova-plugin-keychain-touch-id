@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		464D17452334BDCB00DFBD90 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17442334BDCB00DFBD90 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		464D17472334BDDC00DFBD90 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D17462334BDDC00DFBD90 /* Security.framework */; };
+		464D174A2334BE5F00DFBD90 /* KeychainTouchIdCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17492334BE5F00DFBD90 /* KeychainTouchIdCoordinator.m */; };
+		464D17612334C7A500DFBD90 /* libcordova-plugin-keychain-touch-id.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D171E2334B97800DFBD90 /* libcordova-plugin-keychain-touch-id.a */; };
+		464D17672334C7AB00DFBD90 /* KeychainTouchIdCoordinatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17562334C66B00DFBD90 /* KeychainTouchIdCoordinatorTest.m */; };
+		464D17682334C7E200DFBD90 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17442334BDCB00DFBD90 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		464D176A2334C7E200DFBD90 /* KeychainTouchIdCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17492334BE5F00DFBD90 /* KeychainTouchIdCoordinator.m */; };
+		464D17762334E5FC00DFBD90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17752334E5FC00DFBD90 /* AppDelegate.m */; };
+		464D17792334E5FC00DFBD90 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17782334E5FC00DFBD90 /* ViewController.m */; };
+		464D177C2334E5FC00DFBD90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D177A2334E5FC00DFBD90 /* Main.storyboard */; };
+		464D177E2334E5FE00DFBD90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464D177D2334E5FE00DFBD90 /* Assets.xcassets */; };
+		464D17812334E5FE00DFBD90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D177F2334E5FE00DFBD90 /* LaunchScreen.storyboard */; };
+		464D17842334E5FE00DFBD90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D17832334E5FE00DFBD90 /* main.m */; };
+		464D178A2334E61900DFBD90 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D17462334BDDC00DFBD90 /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		464D17882334E60F00DFBD90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 464D17162334B97800DFBD90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 464D171D2334B97800DFBD90;
+			remoteInfo = "cordova-plugin-keychain-touch-id";
+		};
+		464D178B2334E61F00DFBD90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 464D17162334B97800DFBD90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 464D17712334E5FC00DFBD90;
+			remoteInfo = TestingApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		464D171C2334B97800DFBD90 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		464D171E2334B97800DFBD90 /* libcordova-plugin-keychain-touch-id.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcordova-plugin-keychain-touch-id.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		464D17432334BDCB00DFBD90 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = ../../../../src/ios/KeychainItemWrapper.h; sourceTree = "<group>"; };
+		464D17442334BDCB00DFBD90 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = ../../../../src/ios/KeychainItemWrapper.m; sourceTree = "<group>"; };
+		464D17462334BDDC00DFBD90 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		464D17482334BE5F00DFBD90 /* KeychainTouchIdCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KeychainTouchIdCoordinator.h; path = ../../../../src/ios/KeychainTouchIdCoordinator.h; sourceTree = "<group>"; };
+		464D17492334BE5F00DFBD90 /* KeychainTouchIdCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = KeychainTouchIdCoordinator.m; path = ../../../../src/ios/KeychainTouchIdCoordinator.m; sourceTree = "<group>"; };
+		464D17562334C66B00DFBD90 /* KeychainTouchIdCoordinatorTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeychainTouchIdCoordinatorTest.m; sourceTree = "<group>"; };
+		464D175C2334C7A400DFBD90 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		464D17602334C7A500DFBD90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		464D17722334E5FC00DFBD90 /* TestingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		464D17742334E5FC00DFBD90 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		464D17752334E5FC00DFBD90 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		464D17772334E5FC00DFBD90 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		464D17782334E5FC00DFBD90 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		464D177B2334E5FC00DFBD90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		464D177D2334E5FE00DFBD90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		464D17802334E5FE00DFBD90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		464D17822334E5FE00DFBD90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		464D17832334E5FE00DFBD90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		464D178F2334EC6A00DFBD90 /* TestingApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestingApp.entitlements; sourceTree = "<group>"; };
+		464D17902334ED2000DFBD90 /* TouchID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TouchID.h; path = ../../../../src/ios/TouchID.h; sourceTree = "<group>"; };
+		464D17912334ED2000DFBD90 /* TouchID.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TouchID.m; path = ../../../../src/ios/TouchID.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		464D171B2334B97800DFBD90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464D17472334BDDC00DFBD90 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		464D17592334C7A400DFBD90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464D17612334C7A500DFBD90 /* libcordova-plugin-keychain-touch-id.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		464D176F2334E5FC00DFBD90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464D178A2334E61900DFBD90 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		464D17152334B97800DFBD90 = {
+			isa = PBXGroup;
+			children = (
+				464D17202334B97800DFBD90 /* cordova-plugin-keychain-touch-id */,
+				464D175D2334C7A500DFBD90 /* Tests */,
+				464D17732334E5FC00DFBD90 /* TestingApp */,
+				464D171F2334B97800DFBD90 /* Products */,
+				464D173A2334BB0A00DFBD90 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		464D171F2334B97800DFBD90 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				464D171E2334B97800DFBD90 /* libcordova-plugin-keychain-touch-id.a */,
+				464D175C2334C7A400DFBD90 /* Tests.xctest */,
+				464D17722334E5FC00DFBD90 /* TestingApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		464D17202334B97800DFBD90 /* cordova-plugin-keychain-touch-id */ = {
+			isa = PBXGroup;
+			children = (
+				464D17432334BDCB00DFBD90 /* KeychainItemWrapper.h */,
+				464D17442334BDCB00DFBD90 /* KeychainItemWrapper.m */,
+				464D17482334BE5F00DFBD90 /* KeychainTouchIdCoordinator.h */,
+				464D17492334BE5F00DFBD90 /* KeychainTouchIdCoordinator.m */,
+				464D17902334ED2000DFBD90 /* TouchID.h */,
+				464D17912334ED2000DFBD90 /* TouchID.m */,
+			);
+			path = "cordova-plugin-keychain-touch-id";
+			sourceTree = "<group>";
+		};
+		464D173A2334BB0A00DFBD90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				464D17462334BDDC00DFBD90 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		464D175D2334C7A500DFBD90 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				464D17562334C66B00DFBD90 /* KeychainTouchIdCoordinatorTest.m */,
+				464D17602334C7A500DFBD90 /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		464D17732334E5FC00DFBD90 /* TestingApp */ = {
+			isa = PBXGroup;
+			children = (
+				464D178F2334EC6A00DFBD90 /* TestingApp.entitlements */,
+				464D17742334E5FC00DFBD90 /* AppDelegate.h */,
+				464D17752334E5FC00DFBD90 /* AppDelegate.m */,
+				464D17772334E5FC00DFBD90 /* ViewController.h */,
+				464D17782334E5FC00DFBD90 /* ViewController.m */,
+				464D177A2334E5FC00DFBD90 /* Main.storyboard */,
+				464D177D2334E5FE00DFBD90 /* Assets.xcassets */,
+				464D177F2334E5FE00DFBD90 /* LaunchScreen.storyboard */,
+				464D17822334E5FE00DFBD90 /* Info.plist */,
+				464D17832334E5FE00DFBD90 /* main.m */,
+			);
+			path = TestingApp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		464D171D2334B97800DFBD90 /* cordova-plugin-keychain-touch-id */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 464D17272334B97800DFBD90 /* Build configuration list for PBXNativeTarget "cordova-plugin-keychain-touch-id" */;
+			buildPhases = (
+				464D171A2334B97800DFBD90 /* Sources */,
+				464D171B2334B97800DFBD90 /* Frameworks */,
+				464D171C2334B97800DFBD90 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cordova-plugin-keychain-touch-id";
+			productName = "cordova-plugin-keychain-touch-id";
+			productReference = 464D171E2334B97800DFBD90 /* libcordova-plugin-keychain-touch-id.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		464D175B2334C7A400DFBD90 /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 464D17642334C7A500DFBD90 /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				464D17582334C7A400DFBD90 /* Sources */,
+				464D17592334C7A400DFBD90 /* Frameworks */,
+				464D175A2334C7A400DFBD90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				464D178C2334E61F00DFBD90 /* PBXTargetDependency */,
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 464D175C2334C7A400DFBD90 /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		464D17712334E5FC00DFBD90 /* TestingApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 464D17852334E5FE00DFBD90 /* Build configuration list for PBXNativeTarget "TestingApp" */;
+			buildPhases = (
+				464D176E2334E5FC00DFBD90 /* Sources */,
+				464D176F2334E5FC00DFBD90 /* Frameworks */,
+				464D17702334E5FC00DFBD90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				464D17892334E60F00DFBD90 /* PBXTargetDependency */,
+			);
+			name = TestingApp;
+			productName = TestingApp;
+			productReference = 464D17722334E5FC00DFBD90 /* TestingApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		464D17162334B97800DFBD90 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1030;
+				TargetAttributes = {
+					464D171D2334B97800DFBD90 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					464D175B2334C7A400DFBD90 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					464D17712334E5FC00DFBD90 = {
+						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 464D17192334B97800DFBD90 /* Build configuration list for PBXProject "cordova-plugin-keychain-touch-id" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 464D17152334B97800DFBD90;
+			productRefGroup = 464D171F2334B97800DFBD90 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				464D171D2334B97800DFBD90 /* cordova-plugin-keychain-touch-id */,
+				464D175B2334C7A400DFBD90 /* Tests */,
+				464D17712334E5FC00DFBD90 /* TestingApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		464D175A2334C7A400DFBD90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		464D17702334E5FC00DFBD90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464D17812334E5FE00DFBD90 /* LaunchScreen.storyboard in Resources */,
+				464D177E2334E5FE00DFBD90 /* Assets.xcassets in Resources */,
+				464D177C2334E5FC00DFBD90 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		464D171A2334B97800DFBD90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464D17452334BDCB00DFBD90 /* KeychainItemWrapper.m in Sources */,
+				464D174A2334BE5F00DFBD90 /* KeychainTouchIdCoordinator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		464D17582334C7A400DFBD90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464D17682334C7E200DFBD90 /* KeychainItemWrapper.m in Sources */,
+				464D17672334C7AB00DFBD90 /* KeychainTouchIdCoordinatorTest.m in Sources */,
+				464D176A2334C7E200DFBD90 /* KeychainTouchIdCoordinator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		464D176E2334E5FC00DFBD90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464D17792334E5FC00DFBD90 /* ViewController.m in Sources */,
+				464D17842334E5FE00DFBD90 /* main.m in Sources */,
+				464D17762334E5FC00DFBD90 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		464D17892334E60F00DFBD90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 464D171D2334B97800DFBD90 /* cordova-plugin-keychain-touch-id */;
+			targetProxy = 464D17882334E60F00DFBD90 /* PBXContainerItemProxy */;
+		};
+		464D178C2334E61F00DFBD90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 464D17712334E5FC00DFBD90 /* TestingApp */;
+			targetProxy = 464D178B2334E61F00DFBD90 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		464D177A2334E5FC00DFBD90 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				464D177B2334E5FC00DFBD90 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		464D177F2334E5FE00DFBD90 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				464D17802334E5FE00DFBD90 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		464D17252334B97800DFBD90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		464D17262334B97800DFBD90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		464D17282334B97800DFBD90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		464D17292334B97800DFBD90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		464D17652334C7A500DFBD90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "../../**";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestingApp.app/TestingApp";
+			};
+			name = Debug;
+		};
+		464D17662334C7A500DFBD90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "../../**";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestingApp.app/TestingApp";
+			};
+			name = Release;
+		};
+		464D17862334E5FE00DFBD90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TestingApp/TestingApp.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = VX4E83FBD7;
+				INFOPLIST_FILE = TestingApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.example.testingapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		464D17872334E5FE00DFBD90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TestingApp/TestingApp.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = TestingApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.example.testingapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		464D17192334B97800DFBD90 /* Build configuration list for PBXProject "cordova-plugin-keychain-touch-id" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				464D17252334B97800DFBD90 /* Debug */,
+				464D17262334B97800DFBD90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		464D17272334B97800DFBD90 /* Build configuration list for PBXNativeTarget "cordova-plugin-keychain-touch-id" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				464D17282334B97800DFBD90 /* Debug */,
+				464D17292334B97800DFBD90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		464D17642334C7A500DFBD90 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				464D17652334C7A500DFBD90 /* Debug */,
+				464D17662334C7A500DFBD90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		464D17852334E5FE00DFBD90 /* Build configuration list for PBXNativeTarget "TestingApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				464D17862334E5FE00DFBD90 /* Debug */,
+				464D17872334E5FE00DFBD90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 464D17162334B97800DFBD90 /* Project object */;
+}

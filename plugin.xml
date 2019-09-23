@@ -27,6 +27,8 @@
         <source-file src="src/ios/KeychainWrapper.m" />
         <header-file src="src/ios/KeychainItemWrapper.h" />
         <source-file src="src/ios/KeychainItemWrapper.m" compiler-flags="-fno-objc-arc" />
+        <header-file src="src/ios/KeychainTouchIdCoordinator.h" />
+        <source-file src="src/ios/KeychainTouchIdCoordinator.m" />
         <header-file src="src/ios/TouchID.h" />
         <source-file src="src/ios/TouchID.m" />
         <framework src="Security.framework" />
