@@ -23,10 +23,10 @@
 #import <Cordova/CDV.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TouchID : CDVPlugin {}
 
-@property (strong,nonatomic)NSString* TAG;
-@property (strong, nonatomic) KeychainWrapper* MyKeychainWrapper;
 @property (strong, nonatomic) LAContext* laContext;
 
 - (void) isAvailable:(CDVInvokedUrlCommand*)command;
@@ -37,3 +37,5 @@
 - (void) setLocale:(CDVInvokedUrlCommand*)command;
 
 @end
+
+NS_ASSUME_NONNULL_END

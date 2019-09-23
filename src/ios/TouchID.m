@@ -18,9 +18,8 @@
  */
 
 #import "TouchID.h"
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#import <Cordova/CDV.h>
+
+#import "KeychainTouchIdCoordinator.h"
 
 @implementation TouchID
 
@@ -42,104 +41,83 @@
             else {
                 biometryType = @"touch";
             }
-            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:biometryType];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+            [self sendPluginResultWithStatus:CDVCommandStatus_OK message:biometryType callbackId:command.callbackId];
         }
         else {
-            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @"touch"];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+            [self sendPluginResultWithStatus:CDVCommandStatus_OK message:@"touch" callbackId:command.callbackId];
         }
     }
     else {
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"Touch ID not available"];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self sendPluginResultWithStatus:CDVCommandStatus_ERROR message:@"Touch ID not available" callbackId:command.callbackId];
     }
 }
 
 - (void)setLocale:(CDVInvokedUrlCommand*)command{
-  CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-  [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [self sendPluginResultWithStatus:CDVCommandStatus_OK callbackId:command.callbackId];
 }
 
 - (void)has:(CDVInvokedUrlCommand*)command{
-  	self.TAG = (NSString*)[command.arguments objectAtIndex:0];
-    BOOL hasLoginKey = [[NSUserDefaults standardUserDefaults] boolForKey:self.TAG];
+    NSString *username = (NSString*)[command.arguments objectAtIndex:0];
+    [self ensureBackwardsCompatabilityForUser:username];
+    BOOL hasLoginKey = [self hasPasswordForUsername:username];
     if(hasLoginKey){
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self sendPluginResultWithStatus:CDVCommandStatus_OK callbackId:command.callbackId];
     }
     else{
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"No Password in chain"];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self sendPluginResultWithStatus:CDVCommandStatus_ERROR message:@"No Password in chain" callbackId:command.callbackId];
     }
 }
 
 - (void)save:(CDVInvokedUrlCommand*)command{
-	 	self.TAG = (NSString*)[command.arguments objectAtIndex:0];
-    NSString* password = (NSString*)[command.arguments objectAtIndex:1];
+    KeychainTouchIdCoordinator *touchIdCoordinator = [[KeychainTouchIdCoordinator alloc] init];
+    NSString *username = (NSString*)[command.arguments objectAtIndex:0];
+    NSString *password = (NSString*)[command.arguments objectAtIndex:1];
+    [self ensureBackwardsCompatabilityForUser:username];
     @try {
-        self.MyKeychainWrapper = [[KeychainWrapper alloc]init];
-        [self.MyKeychainWrapper mySetObject:password forKey:(__bridge id)(kSecValueData)];
-        [self.MyKeychainWrapper writeToKeychain];
-        [[NSUserDefaults standardUserDefaults]setBool:true forKey:self.TAG];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [touchIdCoordinator savePassword:password forUsername:username];
+        [self sendPluginResultWithStatus:CDVCommandStatus_OK callbackId:command.callbackId];
     }
     @catch(NSException *exception){
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"Password could not be save in chain"];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self sendPluginResultWithStatus:CDVCommandStatus_ERROR message:@"Password could not be saved in chain" callbackId:command.callbackId];
     }
 }
 
 -(void)delete:(CDVInvokedUrlCommand*)command{
-	 	self.TAG = (NSString*)[command.arguments objectAtIndex:0];
+    KeychainTouchIdCoordinator *touchIdCoordinator = [[KeychainTouchIdCoordinator alloc] init];
+    NSString *username = (NSString*)[command.arguments objectAtIndex:0];
+    [self ensureBackwardsCompatabilityForUser:username];
     @try {
-
-        if(self.TAG && [[NSUserDefaults standardUserDefaults] objectForKey:self.TAG])
-        {
-            self.MyKeychainWrapper = [[KeychainWrapper alloc]init];
-            [self.MyKeychainWrapper resetKeychainItem];
-        }
-
-
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.TAG];
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [touchIdCoordinator deleteInformationForUsername:username];
+        [self sendPluginResultWithStatus:CDVCommandStatus_OK callbackId:command.callbackId];
     }
     @catch(NSException *exception) {
-        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"Could not delete password from chain"];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self sendPluginResultWithStatus:CDVCommandStatus_ERROR message:@"Could not delete password from chain" callbackId:command.callbackId];
     }
-
-
 }
 
 -(void)verify:(CDVInvokedUrlCommand*)command{
-	 	self.TAG = (NSString*)[command.arguments objectAtIndex:0];
-	  NSString* message = (NSString*)[command.arguments objectAtIndex:1];
+    NSString *username = (NSString*)[command.arguments objectAtIndex:0];
+    NSString *message = (NSString*)[command.arguments objectAtIndex:1];
+    [self ensureBackwardsCompatabilityForUser:username];
     self.laContext = [[LAContext alloc] init];
-    self.MyKeychainWrapper = [[KeychainWrapper alloc]init];
 
-    BOOL hasLoginKey = [[NSUserDefaults standardUserDefaults] boolForKey:self.TAG];
+    BOOL hasLoginKey = [self hasPasswordForUsername:username];
     if(hasLoginKey){
-        NSError * error;
+        NSError *error;
         BOOL touchIDAvailable = [self.laContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
 
         if(touchIDAvailable){
             [self.laContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:message reply:^(BOOL success, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-
-                if(success){
-                    NSString *password = [self.MyKeychainWrapper myObjectForKey:@"v_Data"];
-                    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: password];
-                    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-                }
+                    
+                    if(success){
+                        KeychainTouchIdCoordinator *touchIdCoordinator = [[KeychainTouchIdCoordinator alloc] init];
+                        NSString *password = [touchIdCoordinator getPasswordForUsername:username];
+                        [self sendPluginResultWithStatus:CDVCommandStatus_OK message:password callbackId:command.callbackId];
+                    }
                     if(error != nil) {
                         NSDictionary *errorDictionary = @{@"OS":@"iOS",@"ErrorCode":[NSString stringWithFormat:@"%li", (long)error.code],@"ErrorMessage":error.localizedDescription};
-                        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:errorDictionary];
-                        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+                        [self sendPluginResultWithStatus:CDVCommandStatus_ERROR dictMessage:errorDictionary callbackId:command.callbackId];
                     }
                 });
             }];
@@ -150,20 +128,46 @@
             {
                 //If an error is returned from LA Context (should always be true in this situation)
                 NSDictionary *errorDictionary = @{@"OS":@"iOS",@"ErrorCode":[NSString stringWithFormat:@"%li", (long)error.code],@"ErrorMessage":error.localizedDescription};
-                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:errorDictionary];
-                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+                [self sendPluginResultWithStatus:CDVCommandStatus_ERROR dictMessage:errorDictionary callbackId:command.callbackId];
             }
             else
             {
                 //Should never come to this, but we treat it anyway
-                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"Touch ID not available"];
-                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+                [self sendPluginResultWithStatus:CDVCommandStatus_ERROR message:@"Touch ID not available" callbackId:command.callbackId];
             }
         }
     }
     else{
-           CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"-1"];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self sendPluginResultWithStatus:CDVCommandStatus_ERROR message:@"-1" callbackId:command.callbackId];
     }
 }
+
+- (BOOL) hasPasswordForUsername:(NSString*) username {
+    KeychainTouchIdCoordinator *touchIdCoordinator = [[KeychainTouchIdCoordinator alloc] init];
+    NSString *password = [touchIdCoordinator getPasswordForUsername:username];
+    return password != nil && password.length > 0;
+}
+
+- (void) ensureBackwardsCompatabilityForUser:(NSString*) username {
+    KeychainTouchIdCoordinator *touchIdCoordinator = [[KeychainTouchIdCoordinator alloc] init];
+    if ([touchIdCoordinator needsMigrationForUsername:username]) {
+        [touchIdCoordinator migrateUsername:username];
+    }
+}
+
+- (void) sendPluginResultWithStatus:(CDVCommandStatus) status callbackId:(NSString*) callbackId {
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:status];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
+- (void) sendPluginResultWithStatus:(CDVCommandStatus) status message:(NSString*) message callbackId:(NSString*) callbackId {
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:status messageAsString:message];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
+- (void) sendPluginResultWithStatus:(CDVCommandStatus) status dictMessage:(NSDictionary*) message callbackId:(NSString*) callbackId {
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:status messageAsDictionary:message];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
 @end
