@@ -1,5 +1,6 @@
 /*
-File: TouchID.h
+File: KeychainTouchIdCoordinator.h
+Copyright © 2019 Ergon Informatik AG
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,23 +15,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#import "KeychainWrapper.h"
 #import <Foundation/Foundation.h>
-#import <Cordova/CDV.h>
-#import <LocalAuthentication/LocalAuthentication.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TouchID : CDVPlugin {}
+@interface KeychainTouchIdCoordinator : NSObject
 
-@property (strong, nonatomic) LAContext* laContext;
+-(NSString*) getPasswordForUsername:(NSString*) username;
+-(void) savePassword:(NSString*) password forUsername:(NSString*) username;
+-(void) deleteInformationForUsername:(NSString*) username;
 
-- (void) isAvailable:(CDVInvokedUrlCommand*)command;
-- (void) has:(CDVInvokedUrlCommand*)command;
-- (void) save:(CDVInvokedUrlCommand*)command;
-- (void) verify:(CDVInvokedUrlCommand*)command;
-- (void) delete:(CDVInvokedUrlCommand*)command;
-- (void) setLocale:(CDVInvokedUrlCommand*)command;
+-(BOOL) needsMigrationForUsername:(NSString*) username;
+-(BOOL) migrateUsername:(NSString*) username;
 
 @end
 
