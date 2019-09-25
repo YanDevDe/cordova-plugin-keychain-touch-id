@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#import "KeychainWrapper.h"
 #import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
 #import <LocalAuthentication/LocalAuthentication.h>
