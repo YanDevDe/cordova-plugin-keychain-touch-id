@@ -1,7 +1,11 @@
 package com.cordova.plugin.android.fingerprintauth;
 
 import android.annotation.TargetApi;
+import android.os.Build;
 import android.util.Log;
+
+import com.cordova.plugin.android.biometricauth.BiometricAuthentication;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -37,6 +41,8 @@ import org.json.JSONObject;
   public FingerprintAuth() {
   }
 
+  private BiometricAuthentication biometricAuthentication;
+
   public static void onCancelled() {
     mCallbackContext.error("Cancelled");
   }
@@ -51,6 +57,11 @@ import org.json.JSONObject;
    */
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+    if (Build.VERSION.SDK_INT >= 29) {
+      biometricAuthentication = new BiometricAuthentication();
+      biometricAuthentication.initialize(cordova);
+      return;
+    }
     super.initialize(cordova, webView);
 
     packageName = cordova.getActivity().getApplicationContext().getPackageName();
@@ -79,6 +90,9 @@ import org.json.JSONObject;
    */
   public boolean execute(final String action, JSONArray args, CallbackContext callbackContext)
       throws JSONException {
+    if (biometricAuthentication != null) {
+      return biometricAuthentication.execute(cordova, action, args, callbackContext);
+    }
 
     mCallbackContext = callbackContext;
           
