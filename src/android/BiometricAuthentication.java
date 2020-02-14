@@ -1,7 +1,6 @@
 package com.cordova.plugin.android.biometricauth;
 
-import android.content.Context;
-import android.os.Build;
+import android.annotation.TargetApi;
 import android.security.keystore.KeyProperties;
 
 import android.hardware.biometrics.BiometricManager;
@@ -21,6 +20,7 @@ import java.security.NoSuchProviderException;
 
 import javax.crypto.KeyGenerator;
 
+@TargetApi(29)
 public class BiometricAuthentication {
 
     private static final String ANDROID_KEY_STORE = "AndroidKeyStore";
@@ -31,10 +31,6 @@ public class BiometricAuthentication {
     private BiometricContext biometricContext;
 
     public void initialize(CordovaInterface cordova) {
-        if (isSdkVersionUnsupported()) {
-            return;
-        }
-
         BiometricManager biometricManager = cordova.getContext().getSystemService(BiometricManager.class);
         KeyGenerator keyGenerator;
         KeyStore keyStore;
@@ -48,21 +44,12 @@ public class BiometricAuthentication {
     }
 
     public boolean execute(CordovaInterface cordova, String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (isSdkVersionUnsupported()) {
-            callbackContext.sendPluginResult(Error.NO_HARDWARE.toPluginResult());
-            return true;
-        }
-
         Action pluginAction = Action.getOrNull(action);
         if (pluginAction == null) {
             return false;
         }
         pluginAction.getHandler().handle(args, callbackContext, cordova, biometricContext);
         return true;
-    }
-
-    private boolean isSdkVersionUnsupported() {
-        return Build.VERSION.SDK_INT < 28;
     }
 
 }

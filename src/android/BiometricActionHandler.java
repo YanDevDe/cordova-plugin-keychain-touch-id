@@ -3,7 +3,6 @@ package com.cordova.plugin.android.biometricauth;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
-import android.os.Build;
 
 import android.hardware.biometrics.BiometricManager;
 
@@ -49,7 +48,7 @@ public abstract class BiometricActionHandler implements ActionHandler {
     }
 
     private boolean isBiometricPermissionGranted(CordovaInterface cordova) {
-        return Build.VERSION.SDK_INT >= 28 && isPermissionGranted(cordova, Manifest.permission.USE_BIOMETRIC);
+        return isPermissionGranted(cordova, Manifest.permission.USE_BIOMETRIC);
     }
 
     private boolean isPermissionGranted(CordovaInterface cordova, String permission) {
