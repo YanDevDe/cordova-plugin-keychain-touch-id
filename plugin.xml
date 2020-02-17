@@ -43,9 +43,23 @@
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+            <uses-permission android:name="android.permission.USE_BIOMETRIC" />
             <!--<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="23" />-->
         </config-file>
 
+        <source-file src="src/android/Action.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/ActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/BiometricActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/BiometricAuthentication.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/BiometricContext.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/DeleteAction.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/Error.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/HasActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/IsAvailableActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/Preferences.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/SaveActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/SetLocaleActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/VerifyActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
         <source-file src="src/android/FingerprintAuth.java" target-dir="src/com/cordova/plugin/android/fingerprintauth" />
         <source-file src="src/android/FingerprintAuthAux.java" target-dir="src/com/cordova/plugin/android/fingerprintauth" />
         <source-file src="src/android/FingerprintAuthenticationDialogFragment.java" target-dir="src/com/cordova/plugin/android/fingerprintauth" />
