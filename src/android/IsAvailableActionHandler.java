@@ -24,8 +24,8 @@ public class IsAvailableActionHandler extends BiometricActionHandler {
         }
     }
 
-    private boolean hasFeature(CordovaInterface cordova, String featureFace) {
-        return cordova.getContext().getPackageManager().hasSystemFeature(featureFace);
+    private boolean hasFeature(CordovaInterface cordova, String feature) {
+        return cordova.getContext().getPackageManager().hasSystemFeature(feature);
     }
 
 }
