@@ -1,18 +1,29 @@
 package com.cordova.plugin.android.biometricauth;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.pm.PackageManager;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 
 @TargetApi(29)
 public class IsAvailableActionHandler extends BiometricActionHandler {
 
+    private static final String FACE_RECOGNITION_RESPONSE = "face";
+    private static final String FINGERPRINT_RESPONSE = "touch";
+
     @Override
     protected void onBiometricsAvailable(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova, BiometricContext biometricContext) {
-        callbackContext.success();
+        Context context = cordova.getContext();
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            callbackContext.success(FACE_RECOGNITION_RESPONSE);
+        } else if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+            callbackContext.success(FINGERPRINT_RESPONSE);
+        } else {
+            callbackContext.success();
+        }
     }
 
 }
