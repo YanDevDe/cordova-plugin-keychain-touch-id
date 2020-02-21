@@ -17,7 +17,7 @@
 <resources>
     <string name="cancel">Отмена</string>
     <string name="use_backup">Использовать резервный код</string>
-    <string name="fingerprint_auth_dialog_title">Аутентификация по отпечатку пальца</string>
+    <string name="fingerprint_auth_dialog_title">Аутентификация</string>
     <string name="ok">Ok</string>
     <string name="fingerprint_description">Подтвердите отпечаток пальца чтобы продолжить</string>
     <string name="fingerprint_hint">Коснитесь сенсора</string>

@@ -17,7 +17,7 @@
 <resources>
     <string name="cancel">Abbrechen</string>
     <string name="use_backup">Muster benutzen</string>
-    <string name="fingerprint_auth_dialog_title">Fingerabdruck Authentisierung</string>
+    <string name="fingerprint_auth_dialog_title">Authentisierung</string>
     <string name="ok">Ok</string>
     <string name="fingerprint_description">Fingerabdruck bestätigen um fortzufahren</string>
     <string name="fingerprint_hint">Bitte legen Sie Ihren Finger auf den Touch Sensor</string>
