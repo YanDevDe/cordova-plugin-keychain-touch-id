@@ -9,14 +9,12 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.util.Base64;
 import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -28,7 +26,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.util.Objects;
 import java.util.concurrent.Executor;
 
 import javax.crypto.BadPaddingException;
@@ -37,8 +34,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-
-import ch.viac.vorsorge3a.dev.R;
 
 import static com.cordova.plugin.android.biometricauth.Preferences.getEncodedPasswordKey;
 import static com.cordova.plugin.android.biometricauth.Preferences.getInitializationVectorKey;

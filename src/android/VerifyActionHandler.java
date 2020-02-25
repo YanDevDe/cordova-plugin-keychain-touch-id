@@ -1,6 +1,5 @@
 package com.cordova.plugin.android.biometricauth;
 
-
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -33,8 +32,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-
-import ch.viac.vorsorge3a.dev.R;
 
 import static com.cordova.plugin.android.biometricauth.Preferences.getEncodedPasswordKey;
 import static com.cordova.plugin.android.biometricauth.Preferences.getInitializationVectorKey;
