@@ -140,15 +140,10 @@ public class FingerprintAuthAux {
         }
         if (!isKeyCreated) {
             Log.e(TAG, errorMessage);
-            setPluginResultError(errorMessage);
+            mPluginResult = Error.OTHER.toPluginResult(errorMessage);
+            mCallbackContext.sendPluginResult(mPluginResult);
         }
         return isKeyCreated;
-    }
-
-    public static boolean setPluginResultError(String errorMessage) {
-        mCallbackContext.error(errorMessage);
-        mPluginResult = new PluginResult(PluginResult.Status.ERROR);
-        return false;
     }
 
     /**
@@ -250,10 +245,9 @@ public class FingerprintAuthAux {
                             mCallbackContext.sendPluginResult(mPluginResult);
                             return true;
                         } catch (IllegalBlockSizeException e) {
-                            mPluginResult =
-                                    new PluginResult(PluginResult.Status.ERROR, "Error string is to big.");
+                            mPluginResult = Error.OTHER.toPluginResult("Error string is to big.");
                         } catch (BadPaddingException e) {
-                            mPluginResult = new PluginResult(PluginResult.Status.ERROR, "Error Bad Padding.");
+                            mPluginResult = Error.OTHER.toPluginResult("Error Bad Padding.");
                         }
                         mCallbackContext.sendPluginResult(mPluginResult);
                     }
@@ -419,7 +413,8 @@ public class FingerprintAuthAux {
         } catch (KeyPermanentlyInvalidatedException e) {
             removePermanentlyInvalidatedKey();
             errorMessage = "KeyPermanentlyInvalidatedException";
-            setPluginResultError(errorMessage);
+            mPluginResult = Error.OTHER.toPluginResult(errorMessage);
+            mCallbackContext.sendPluginResult(mPluginResult);
         } catch (InvalidKeyException e) {
             errorMessage = initCipherExceptionErrorPrefix + "InvalidKeyException";
         } catch (InvalidAlgorithmParameterException e) {
@@ -542,7 +537,7 @@ public class FingerprintAuthAux {
             mPluginResult = new PluginResult(PluginResult.Status.OK, result);
             mPluginResult.setKeepCallback(false);
         } else {
-            mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
+            mPluginResult = Error.OTHER.toPluginResult(errorMessage);
             mPluginResult.setKeepCallback(false);
         }
         mCallbackContext.sendPluginResult(mPluginResult);

@@ -1,5 +1,7 @@
 package com.cordova.plugin.android.biometricauth;
 
+import static java.lang.String.format;
+
 import org.apache.cordova.PluginResult;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +12,8 @@ public enum Error {
     NO_CIPHER(-4, "No cipher available"),
     NO_SECRET_KEY(-5, "Secret Key not set."),
     NO_HARDWARE(-6, "Biometry is not available on this device."),
-    NO_FINGERPRINT_ENROLLED(-7, "No fingers are enrolled with Touch ID.");
+    NO_FINGERPRINT_ENROLLED(-7, "No fingers are enrolled with Touch ID."),
+    OTHER(-9, "Unknown error");
 
     private static final String OS_KEY = "OS";
     private static final String OS_VALUE = "Android";
@@ -26,20 +29,27 @@ public enum Error {
     }
 
     public PluginResult toPluginResult() {
-        String message;
         try {
-            message = toJSONObject().toString();
+            return new PluginResult(PluginResult.Status.ERROR, toJSONObject(message));
         } catch (JSONException e) {
-            message = e.getMessage();
+            return new PluginResult(PluginResult.Status.ERROR, e.getMessage());
         }
-        return new PluginResult(PluginResult.Status.ERROR, message);
     }
 
-    private JSONObject toJSONObject() throws JSONException {
+    public PluginResult toPluginResult(String customErrorMessage) {
+        try {
+            String errorMessage = format("%s: %s", message, customErrorMessage);
+            return new PluginResult(PluginResult.Status.ERROR, toJSONObject(errorMessage));
+        } catch (JSONException e) {
+            return new PluginResult(PluginResult.Status.ERROR, e.getMessage());
+        }
+    }
+
+    private JSONObject toJSONObject(String errorMessage) throws JSONException {
         JSONObject json = new JSONObject();
         json.put(OS_KEY, OS_VALUE);
         json.put(ERROR_CODE_KEY, String.valueOf(code));
-        json.put(ERROR_MESSAGE_KEY, message);
+        json.put(ERROR_MESSAGE_KEY, errorMessage);
         return json;
     }
 }
