@@ -20,6 +20,8 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.cordova.plugin.android.biometricauth.Error;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
@@ -56,19 +58,6 @@ public class FingerprintAuthAux {
     private static final String DIALOG_FRAGMENT_TAG = "FpAuthDialog";
     private static final String ANDROID_KEY_STORE = "AndroidKeyStore";
     private static final String SHARED_PREFS_NAME = "FingerSPref";
-
-    // Plugin response codes and messages
-    private static final String OS = "OS";
-    private static final String ANDROID = "Android";
-    private static final String ERROR_CODE = "ErrorCode";
-    private static final String ERROR_MESSAGE = "ErrorMessage";
-    private static final String NO_SECRET_KEY_CODE = "-5";
-    private static final String NO_SECRET_MESSAGE = "Secret Key not set.";
-    private static final String NO_HARDWARE_CODE = "-6";
-    private static final String NO_HARDWARE_MESSAGE = "Biometry is not available on this device.";
-    private static final String NO_FINGERPRINT_ENROLLED_CODE = "-7";
-    private static final String NO_FINGERPRINT_ENROLLED_MESSAGE =
-            "No fingers are enrolled with Touch ID.";
 
     // Plugin Javascript actions
     private static final String SAVE = "save";
@@ -156,10 +145,6 @@ public class FingerprintAuthAux {
         return isKeyCreated;
     }
 
-    public static void onCancelled() {
-        mCallbackContext.error("Cancelled");
-    }
-
     public static boolean setPluginResultError(String errorMessage) {
         mCallbackContext.error(errorMessage);
         mPluginResult = new PluginResult(PluginResult.Status.ERROR);
@@ -226,10 +211,7 @@ public class FingerprintAuthAux {
         Log.v(TAG, "FingerprintAuth action: " + action);
         if (android.os.Build.VERSION.SDK_INT < 23) {
             Log.e(TAG, "minimum SDK version 23 required");
-
-            String errorMessage = createErrorMessage(NO_HARDWARE_CODE, NO_HARDWARE_MESSAGE);
-            mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
-            mCallbackContext.sendPluginResult(mPluginResult);
+            mCallbackContext.sendPluginResult(Error.NO_HARDWARE.toPluginResult());
             return true;
         }
         if (action.equals(SAVE)) {
@@ -277,8 +259,7 @@ public class FingerprintAuthAux {
                     }
                 }
             } else {
-                String errorMessage = createErrorMessage(NO_HARDWARE_CODE, NO_HARDWARE_MESSAGE);
-                mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
+                mPluginResult = Error.NO_HARDWARE.toPluginResult();
             }
             return true;
         } else if (action.equals(VERIFY)) {
@@ -292,20 +273,13 @@ public class FingerprintAuthAux {
                         showFingerprintDialog(Cipher.DECRYPT_MODE, message, cordova);
                         mPluginResult.setKeepCallback(true);
                     } else {
-                        String errorMessage = createErrorMessage(NO_SECRET_KEY_CODE, NO_SECRET_MESSAGE);
-                        mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
-                        mCallbackContext.sendPluginResult(mPluginResult);
+                        mCallbackContext.sendPluginResult(Error.NO_SECRET_KEY.toPluginResult());
                     }
                 } else {
-                    String errorMessage =
-                            createErrorMessage(NO_FINGERPRINT_ENROLLED_CODE, NO_FINGERPRINT_ENROLLED_MESSAGE);
-                    mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
-                    mCallbackContext.sendPluginResult(mPluginResult);
+                    mCallbackContext.sendPluginResult(Error.NO_FINGERPRINT_ENROLLED.toPluginResult());
                 }
             } else {
-                String errorMessage = createErrorMessage(NO_HARDWARE_CODE, NO_HARDWARE_MESSAGE);
-                mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
-                mCallbackContext.sendPluginResult(mPluginResult);
+                mCallbackContext.sendPluginResult(Error.NO_HARDWARE.toPluginResult());
             }
             return true;
         } else if (action.equals(IS_AVAILABLE)) {
@@ -313,13 +287,10 @@ public class FingerprintAuthAux {
                 if (hasEnrolledFingerprints()) {
                     mPluginResult = new PluginResult(PluginResult.Status.OK);
                 } else {
-                    String errorMessage =
-                            createErrorMessage(NO_FINGERPRINT_ENROLLED_CODE, NO_FINGERPRINT_ENROLLED_MESSAGE);
-                    mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
+                    mPluginResult = Error.NO_FINGERPRINT_ENROLLED.toPluginResult();
                 }
             } else {
-                String errorMessage = createErrorMessage(NO_HARDWARE_CODE, NO_HARDWARE_MESSAGE);
-                mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
+                mPluginResult = Error.NO_HARDWARE.toPluginResult();
             }
 
             mCallbackContext.sendPluginResult(mPluginResult);
@@ -360,7 +331,7 @@ public class FingerprintAuthAux {
             if (removed) {
                 mPluginResult = new PluginResult(PluginResult.Status.OK);
             } else {
-                mPluginResult = new PluginResult(PluginResult.Status.ERROR);
+                mPluginResult = Error.EDITING_FAILED.toPluginResult();
             }
             mCallbackContext.sendPluginResult(mPluginResult);
             return true;
@@ -508,8 +479,7 @@ public class FingerprintAuthAux {
                     mFragment.setCryptoObject(new FingerprintManager.CryptoObject(mCipher));
                     mFragment.show(cordova.getActivity().getFragmentManager(), DIALOG_FRAGMENT_TAG);
                 } else {
-                    mPluginResult = new PluginResult(PluginResult.Status.ERROR, "Failed to init Cipher");
-                    mCallbackContext.sendPluginResult(mPluginResult);
+                    mCallbackContext.sendPluginResult(Error.NO_CIPHER.toPluginResult());
                 }
             }
         });
@@ -585,19 +555,6 @@ public class FingerprintAuthAux {
         } catch (KeyStoreException e) {
             Log.e(TAG, e.getMessage());
         }
-    }
-
-    private String createErrorMessage(final String errorCode, final String errorMessage) {
-        JSONObject resultJson = new JSONObject();
-        try {
-            resultJson.put(OS, ANDROID);
-            resultJson.put(ERROR_CODE, errorCode);
-            resultJson.put(ERROR_MESSAGE, errorMessage);
-            return resultJson.toString();
-        } catch (JSONException e) {
-            Log.e(TAG, e.getMessage());
-        }
-        return "";
     }
 
 }

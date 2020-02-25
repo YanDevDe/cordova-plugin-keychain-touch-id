@@ -5,6 +5,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public enum Error {
+    CANCELLED(-2, "Cancelled"),
+    EDITING_FAILED(-3, "Could not edit shared preferences"),
+    NO_CIPHER(-4, "No cipher available"),
     NO_SECRET_KEY(-5, "Secret Key not set."),
     NO_HARDWARE(-6, "Biometry is not available on this device."),
     NO_FINGERPRINT_ENROLLED(-7, "No fingers are enrolled with Touch ID.");

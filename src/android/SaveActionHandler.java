@@ -56,7 +56,7 @@ public class SaveActionHandler extends BiometricActionHandler {
             }
         } catch (CertificateException | IOException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableKeyException | InvalidAlgorithmParameterException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while saving", e);
-            callbackContext.sendPluginResult(Error.NO_SECRET_KEY.toPluginResult());
+            callbackContext.sendPluginResult(Error.NO_SECRET_KEY.toPluginResult(e.getMessage()));
             return;
         }
         SharedPreferences sharedPreferences;
@@ -66,7 +66,7 @@ public class SaveActionHandler extends BiometricActionHandler {
             cipher = getCipher(secretKey);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while saving", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.NO_CIPHER.toPluginResult(e.getMessage()));
             return;
         }
         if (userAuthenticationRequired) {
@@ -109,7 +109,7 @@ public class SaveActionHandler extends BiometricActionHandler {
         DialogInterface.OnClickListener onClickCancel = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                callbackContext.error("Cancelled");
+                callbackContext.sendPluginResult(Error.CANCELLED.toPluginResult());
             }
         };
         return new BiometricPrompt.Builder(cordova.getContext())
@@ -128,7 +128,7 @@ public class SaveActionHandler extends BiometricActionHandler {
             encryptedPassword = cipher.doFinal(password.getBytes());
         } catch (BadPaddingException | IllegalBlockSizeException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while saving", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.OTHER.toPluginResult(e.getMessage()));
             return;
         }
         sharedPreferences.edit()

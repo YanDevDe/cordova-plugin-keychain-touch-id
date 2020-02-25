@@ -5,12 +5,12 @@ import android.os.Build;
 import android.util.Log;
 
 import com.cordova.plugin.android.biometricauth.BiometricAuthentication;
+import com.cordova.plugin.android.biometricauth.Error;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,20 +19,12 @@ import org.json.JSONObject;
 
 
   public static final String TAG = "FingerprintAuth";
-  // Plugin response codes and messages
-  private static final String OS = "OS";
-  private static final String ANDROID = "Android";
-  private static final String ERROR_CODE = "ErrorCode";
-  private static final String ERROR_MESSAGE = "ErrorMessage";
-  private static final String NO_HARDWARE_CODE = "-6";
-  private static final String NO_HARDWARE_MESSAGE = "Biometry is not available on this device.";
 
   /**
    * Alias for our key in the Android Key Store
    */
   public static String packageName;
   public static CallbackContext mCallbackContext;
-  public static PluginResult mPluginResult;
 
   public FingerprintAuthAux mFingerprintAuthAux;
   /**
@@ -44,7 +36,7 @@ import org.json.JSONObject;
   private BiometricAuthentication biometricAuthentication;
 
   public static void onCancelled() {
-    mCallbackContext.error("Cancelled");
+    mCallbackContext.sendPluginResult(Error.CANCELLED.toPluginResult());
   }
 
 
@@ -65,8 +57,6 @@ import org.json.JSONObject;
     super.initialize(cordova, webView);
 
     packageName = cordova.getActivity().getApplicationContext().getPackageName();
-    mPluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
-
 
 
     if (android.os.Build.VERSION.SDK_INT < 23) {
@@ -97,9 +87,7 @@ import org.json.JSONObject;
     mCallbackContext = callbackContext;
           
     if (android.os.Build.VERSION.SDK_INT < 23) {
-      String errorMessage = createErrorMessage(NO_HARDWARE_CODE, NO_HARDWARE_MESSAGE);
-      mPluginResult = new PluginResult(PluginResult.Status.ERROR, errorMessage);
-      mCallbackContext.sendPluginResult(mPluginResult);
+      callbackContext.sendPluginResult(Error.NO_HARDWARE.toPluginResult());
       return true;
     }
 
@@ -112,18 +100,4 @@ import org.json.JSONObject;
 
   }
 
-
-  private String createErrorMessage(final String errorCode, final String errorMessage) {
-    JSONObject resultJson = new JSONObject();
-    try {
-      resultJson.put(OS, ANDROID);
-      resultJson.put(ERROR_CODE, errorCode);
-      resultJson.put(ERROR_MESSAGE, errorMessage);
-      return resultJson.toString();
-    } catch (JSONException e) {
-      Log.e(TAG, e.getMessage());
-    }
-    return "";
-
-  }
 }

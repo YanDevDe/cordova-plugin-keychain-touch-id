@@ -60,7 +60,7 @@ public class VerifyActionHandler extends BiometricActionHandler {
             cipher = getCipher(preferencesKey, secretKey, sharedPreferences);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidAlgorithmParameterException | InvalidKeyException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while verifying", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.NO_CIPHER.toPluginResult(e.getMessage()));
             return;
         }
         showBiometricPrompt(callbackContext, cordova, preferencesKey, titleMessage, sharedPreferences, cipher);
@@ -90,7 +90,7 @@ public class VerifyActionHandler extends BiometricActionHandler {
             decryptedPassword = result.getCryptoObject().getCipher().doFinal(encryptedPassword);
         } catch (BadPaddingException | IllegalBlockSizeException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while verifying", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.OTHER.toPluginResult(e.getMessage()));
             return;
         }
         callbackContext.success(new String(decryptedPassword));
@@ -100,7 +100,7 @@ public class VerifyActionHandler extends BiometricActionHandler {
         DialogInterface.OnClickListener onClickCancel = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                callbackContext.error("Cancelled");
+                callbackContext.sendPluginResult(Error.CANCELLED.toPluginResult());
             }
         };
         return new BiometricPrompt.Builder(cordova.getContext())
