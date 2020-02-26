@@ -9,14 +9,12 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.util.Base64;
 import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -28,7 +26,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.util.Objects;
 import java.util.concurrent.Executor;
 
 import javax.crypto.BadPaddingException;
@@ -37,8 +34,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-
-import ch.viac.vorsorge3a.dev.R;
 
 import static com.cordova.plugin.android.biometricauth.Preferences.getEncodedPasswordKey;
 import static com.cordova.plugin.android.biometricauth.Preferences.getInitializationVectorKey;
@@ -61,7 +56,7 @@ public class SaveActionHandler extends BiometricActionHandler {
             }
         } catch (CertificateException | IOException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableKeyException | InvalidAlgorithmParameterException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while saving", e);
-            callbackContext.sendPluginResult(Error.NO_SECRET_KEY.toPluginResult());
+            callbackContext.sendPluginResult(Error.NO_SECRET_KEY.toPluginResult(e.getMessage()));
             return;
         }
         SharedPreferences sharedPreferences;
@@ -71,7 +66,7 @@ public class SaveActionHandler extends BiometricActionHandler {
             cipher = getCipher(secretKey);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while saving", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.NO_CIPHER.toPluginResult(e.getMessage()));
             return;
         }
         if (userAuthenticationRequired) {
@@ -114,7 +109,7 @@ public class SaveActionHandler extends BiometricActionHandler {
         DialogInterface.OnClickListener onClickCancel = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                callbackContext.error("Cancelled");
+                callbackContext.sendPluginResult(Error.CANCELLED.toPluginResult());
             }
         };
         return new BiometricPrompt.Builder(cordova.getContext())
@@ -133,7 +128,7 @@ public class SaveActionHandler extends BiometricActionHandler {
             encryptedPassword = cipher.doFinal(password.getBytes());
         } catch (BadPaddingException | IllegalBlockSizeException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while saving", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.OTHER.toPluginResult(e.getMessage()));
             return;
         }
         sharedPreferences.edit()

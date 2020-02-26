@@ -1,6 +1,5 @@
 package com.cordova.plugin.android.biometricauth;
 
-
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -34,8 +33,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
-import ch.viac.vorsorge3a.dev.R;
-
 import static com.cordova.plugin.android.biometricauth.Preferences.getEncodedPasswordKey;
 import static com.cordova.plugin.android.biometricauth.Preferences.getInitializationVectorKey;
 
@@ -63,7 +60,7 @@ public class VerifyActionHandler extends BiometricActionHandler {
             cipher = getCipher(preferencesKey, secretKey, sharedPreferences);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidAlgorithmParameterException | InvalidKeyException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while verifying", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.NO_CIPHER.toPluginResult(e.getMessage()));
             return;
         }
         showBiometricPrompt(callbackContext, cordova, preferencesKey, titleMessage, sharedPreferences, cipher);
@@ -93,7 +90,7 @@ public class VerifyActionHandler extends BiometricActionHandler {
             decryptedPassword = result.getCryptoObject().getCipher().doFinal(encryptedPassword);
         } catch (BadPaddingException | IllegalBlockSizeException e) {
             Log.e(BiometricAuthentication.TAG, "Exception while verifying", e);
-            callbackContext.error(e.getMessage());
+            callbackContext.sendPluginResult(Error.OTHER.toPluginResult(e.getMessage()));
             return;
         }
         callbackContext.success(new String(decryptedPassword));
@@ -103,7 +100,7 @@ public class VerifyActionHandler extends BiometricActionHandler {
         DialogInterface.OnClickListener onClickCancel = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                callbackContext.error("Cancelled");
+                callbackContext.sendPluginResult(Error.CANCELLED.toPluginResult());
             }
         };
         return new BiometricPrompt.Builder(cordova.getContext())

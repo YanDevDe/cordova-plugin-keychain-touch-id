@@ -15,8 +15,8 @@ public class DeleteActionHandler implements ActionHandler {
     public void handle(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova, BiometricContext biometricContext) throws JSONException {
         String key = args.getString(0);
         boolean removed = removeSharedPreferences(cordova, key);
-        PluginResult.Status status = removed ? PluginResult.Status.OK : PluginResult.Status.ERROR;
-        callbackContext.sendPluginResult(new PluginResult(status));
+        PluginResult pluginResult = removed ? new PluginResult(PluginResult.Status.OK) : Error.EDITING_FAILED.toPluginResult();
+        callbackContext.sendPluginResult(pluginResult);
     }
 
     private boolean removeSharedPreferences(CordovaInterface cordova, String key) {
