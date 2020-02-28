@@ -52,6 +52,7 @@
         <source-file src="src/android/BiometricActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
         <source-file src="src/android/BiometricAuthentication.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
         <source-file src="src/android/BiometricContext.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
+        <source-file src="src/android/BiometricResources.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
         <source-file src="src/android/DeleteActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
         <source-file src="src/android/Error.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
         <source-file src="src/android/HasActionHandler.java" target-dir="src/com/cordova/plugin/android/biometricauth" />
