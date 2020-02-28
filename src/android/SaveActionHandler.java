@@ -113,8 +113,8 @@ public class SaveActionHandler extends BiometricActionHandler {
             }
         };
         return new BiometricPrompt.Builder(cordova.getContext())
-                .setNegativeButton(cordova.getActivity().getResources().getString(R.string.cancel), getExecutor(cordova), onClickCancel)
-                .setTitle(cordova.getActivity().getResources().getString(R.string.fingerprint_auth_dialog_title))
+                .setNegativeButton(BiometricResources.getCancelText(cordova), getExecutor(cordova), onClickCancel)
+                .setTitle(BiometricResources.getTitleText(cordova))
                 .build();
     }
 
