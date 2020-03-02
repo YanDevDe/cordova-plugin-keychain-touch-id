@@ -67,8 +67,7 @@ Call the function you like
 **isAvailable(successCallback(biometryType), errorCallback(msg))** will Check if touchid is available on the used device. The `successCallback` gets the `biometryType` argument with 'face' on iPhone X, 'touch' on other devices.
 
 **save(key,password, successCallback, errorCallback(msg))**
-will save a password under the key in the device keychain, which can be retrieved using a fingerprint. 
-userAuthenticationRequired if true will save after authentication with fingerprint, if false there's no need to authenticate to save. Default to true, if not set.
+will save a password under the key in the device keychain, which can be retrieved using a fingerprint.
 
 **verify(key,message,successCallback(password), errorCallback(errorCode))**
 will open the fingerprint dialog, for the given key, showing an additional message.
